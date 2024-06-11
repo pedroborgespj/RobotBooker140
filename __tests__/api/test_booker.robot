@@ -12,6 +12,8 @@ Suite Setup    Create Token    ${url}
 
 *** Test Cases ***
 Create Booking
+    Ping Health Check    ${url}
+    
     ${headers}    Create Dictionary    Content-Type=${content_type}
     ${body}    Evaluate    json.loads(open('./fixtures/json/booking1.json').read())
 
@@ -24,6 +26,7 @@ Create Booking
     Should Be Equal    ${response_body}[booking][bookingdates][checkin]    2024-04-27
 
 Get Booking
+    Ping Health Check    ${url}
     Get Booking Id    ${url}    ${firstname}    ${lastname}
 
     ${response}    GET    url=${url}/booking/${booking_id}
@@ -41,6 +44,7 @@ Get Booking
     Should Be Equal    ${response_body}[additionalneeds]    ${additionalneeds}
 
 Update Booking
+    Ping Health Check    ${url}
     Get Booking Id    ${url}    ${firstname}    ${lastname}
     ${headers}    Create Dictionary    Content-Type=${content_type}    Cookie=token=${token}
     ${body}    Create Dictionary    firstname=${firstname} 
@@ -63,6 +67,7 @@ Update Booking
     Should Be Equal    ${response_body}[additionalneeds]    ${additionalneeds}
 
 Partial Update Boooking
+    Ping Health Check    ${url}
     Get Booking Id    ${url}    ${firstname}    ${lastname}
     ${headers}    Create Dictionary    Content-Type=${content_type}    Cookie=token=${token}
     ${body}    Create Dictionary    additionalneeds=Dinner
@@ -82,6 +87,7 @@ Partial Update Boooking
     Should Be Equal    ${response_body}[additionalneeds]    Dinner
 
 Delete Booking
+    Ping Health Check    ${url}
     Get Booking Id    ${url}    ${firstname}    ${lastname}
     ${headers}    Create Dictionary    Content-Type=${content_type}    Cookie=token=${token}
 

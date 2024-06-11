@@ -26,3 +26,10 @@ Get Booking Id
     
     ${booking_id}    Set Variable    ${response_body}[0][bookingid]
     Set Suite Variable    ${booking_id}
+
+Ping Health Check
+    [Arguments]    ${url}
+
+    ${response}    GET    url=${url}/ping
+
+    Status Should Be    201

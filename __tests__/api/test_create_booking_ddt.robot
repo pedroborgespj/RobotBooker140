@@ -12,6 +12,8 @@ TC001    ${firstname}    ${lastname}    ${totalprice}    ${depositpaid}    ${che
 *** Keywords ***
 Create Booking DDT
     [Arguments]    ${firstname}    ${lastname}    ${totalprice}    ${depositpaid}    ${checkin}    ${checkout}    ${additionalneeds}
+    Ping Health Check    ${url}
+    
     ${headers}    Create Dictionary    Content-Type=${content_type}
     ${totalprice}    Convert To Integer    ${totalprice}
     ${depositpaid}    Convert To Boolean    ${depositpaid}
